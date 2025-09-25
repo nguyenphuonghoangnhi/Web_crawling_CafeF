@@ -7,4 +7,13 @@ This project uses **Python + Streamlit + Plotly** to **collect and visualize sto
 - Display the data in a table and interactive line and bar charts using Plotly.
 - Allow **selecting a time range**: from start date to end date.
 - Automatically update the data daily (customizable).
-## Project Structure
+## Installation
+
+
+##Notes
+- Do not push `venv/` to GitHub.
+- The project is designed for educational purpose.
+
+## Acknowledgements
+- CafeF for data source.
+- Python libraries: streamlit, pandas, plotly, requests, schedule.
