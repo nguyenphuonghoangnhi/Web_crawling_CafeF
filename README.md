@@ -10,7 +10,7 @@ This project uses **Python + Streamlit + Plotly** to **collect and visualize sto
 ## Installation
 
 
-##Notes
+## Notes
 - Do not push `venv/` to GitHub.
 - The project is designed for educational purpose.
 
