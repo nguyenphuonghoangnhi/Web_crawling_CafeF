@@ -6,13 +6,13 @@ This project uses **Python + Streamlit + Plotly** to **collect and visualize sto
 - Allow **selecting a time range**: from start date to end date.
 - Automatically update the data daily (customizable).
 ## Installation 
-### Clone the repository
+#Clone the repository
 git clone https://github.com/nguyenphuonghoangnhi/Web_crawling_CafeF.git
 cd Web_crawling_CafeF
-### Create and activate a virtual environment
+#Create and activate a virtual environment
 python -m venv venv
 venv\Scripts\activate      
-### Install required packages
+#Install required packages
 pip install -r requirements.txt
 ## Usage
 Run the Streamlit app: streamlit run crawler.py
