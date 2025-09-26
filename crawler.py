@@ -13,7 +13,7 @@ from plotly.subplots import make_subplots
 API_URL = "https://cafef.vn/du-lieu/Ajax/PageNew/DataHistory/PriceHistory.ashx"
 CACHE_DIR = "data_cache"
 DEFAULT_SYMBOL = "HPG"
-MAX_PAGES = 120
+MAX_PAGES = 1000
 SCHED_TIME = "17:00"
 
 os.makedirs(CACHE_DIR, exist_ok=True)
@@ -199,18 +199,21 @@ def make_figure(df: pd.DataFrame, symbol: str,
 
 # ================== STREAMLIT ==================
 def main():
+    st.set_page_config(layout="wide", page_title="Dashboard chứng khoán CafeF")  # layout ngang
+
     st.title("📊 Dashboard chứng khoán CafeF")
 
+    # Nhập thông tin cổ phiếu và khoảng thời gian
     symbol = st.text_input("Nhập mã cổ phiếu:", DEFAULT_SYMBOL)
     col1, col2 = st.columns(2)
     with col1:
         date_from = st.date_input("Chọn ngày bắt đầu", datetime.today() - timedelta(days=365))
     with col2:
-        date_to = st.date_input("Chọn ngày kết thúc (để trống nếu muốn lấy đến hiện tại)", value=None)
+        date_to = st.date_input("Chọn ngày kết thúc (để trống nếu muốn lấy đến hiện tại)", value=datetime.today())
     if date_to is None:
         date_to = datetime.today().date()
 
-    if st.button("Hiển thị biểu đồ"):
+    if st.button("Hiển thị"):
         df = load_from_cache(symbol)
         if df.empty:
             df = get_stock_data(symbol)
@@ -220,16 +223,21 @@ def main():
         if not df.empty:
             date_to_final = pd.to_datetime(date_to) if date_to else pd.to_datetime(datetime.today())
             df_filtered = df[(df["Ngày"] >= pd.to_datetime(date_from)) & (df["Ngày"] <= date_to_final)]
-            if not df_filtered.empty:
-                st.success(f"Hiển thị {len(df_filtered)} dòng dữ liệu cho {symbol}")
-                df_display = df_filtered.copy()
-                df_display["Ngày"] = df_display["Ngày"].dt.strftime("%d/%m/%Y")  # chỉ ngày/tháng/năm
-                st.dataframe(df_display.tail(120))
 
+            if not df_filtered.empty:
+                # ==== BẢNG DỮ LIỆU ====
+                st.subheader(f"Dữ liệu [{symbol.upper()}]")
+                df_display = df_filtered.copy()
+                df_display["Ngày"] = df_display["Ngày"].dt.strftime("%d/%m/%Y")
+                st.dataframe(df_display.tail(1000), use_container_width=True)
+
+                # ==== BIỂU ĐỒ ====
+                st.subheader("Biểu đồ")
                 fig = make_figure(df_filtered, symbol,
                                   show_open=True, show_high=True,
                                   show_low=True, show_volume=True)
                 st.plotly_chart(fig, use_container_width=True)
+
             else:
                 st.warning("Không có dữ liệu trong khoảng thời gian này.")
         else:
