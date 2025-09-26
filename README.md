@@ -11,18 +11,18 @@ This project uses **Python + Streamlit + Plotly** to **collect and visualize sto
 
 ## Installation 
 
-- Clone the repositorygit
+- Clone the repositorygit: 
 `clone https://github.com/nguyenphuonghoangnhi/Web_crawling_CafeF.git`
 `cd Web_crawling_CafeF`
-- Create and activate a virtual environment
+- Create and activate a virtual environment: 
 `python -m venv venv`
 `venv\Scripts\activate`      
-- Install required packages
+- Install required packages: 
 `pip install -r requirements.txt`
 
 ## Usage
 
-Run the Streamlit app: streamlit run crawler.py
+Run the Streamlit app: `streamlit run crawler.py`
 
 ## Notes
 
