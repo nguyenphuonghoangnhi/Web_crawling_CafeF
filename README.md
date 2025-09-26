@@ -7,7 +7,6 @@ This project uses **Python + Streamlit + Plotly** to **collect and visualize sto
 - Automatically update the data daily (customizable).
 ## Installation 
 ### Clone the repository
-```bash
 git clone https://github.com/nguyenphuonghoangnhi/Web_crawling_CafeF.git
 cd Web_crawling_CafeF
 ### Create and activate a virtual environment
